@@ -1,4 +1,4 @@
-package net.micg.habitmaster.ui.theme
+package net.micg.habitmaster.presenter.theme
 
 import androidx.compose.ui.graphics.Color
 
