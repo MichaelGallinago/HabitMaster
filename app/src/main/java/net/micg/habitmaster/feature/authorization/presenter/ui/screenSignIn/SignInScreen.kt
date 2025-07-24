@@ -15,13 +15,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.micg.habitmaster.R
 import net.micg.habitmaster.feature.authorization.presenter.ui.components.AppLogo
 import net.micg.habitmaster.feature.authorization.presenter.ui.components.ExternalAuthorizations
+import org.koin.compose.koinInject
 
 @Composable
-fun SignInScreen(viewModel: SignInViewModel, modifier: Modifier = Modifier) = Column(
+@Preview
+fun SignInScreen(
+    modifier: Modifier = Modifier,
+    viewModel: SignInViewModel = koinInject()
+) = Column(
     modifier = modifier
         .fillMaxSize()
         .padding(24.dp),
@@ -29,7 +35,6 @@ fun SignInScreen(viewModel: SignInViewModel, modifier: Modifier = Modifier) = Co
     verticalArrangement = Arrangement.Center
 ) {
     AppLogo()
-
 
     OutlinedTextField(
         value = viewModel.login,

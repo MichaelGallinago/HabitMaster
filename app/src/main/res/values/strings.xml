@@ -7,4 +7,6 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="logo">Logo</string>
+    <string name="email">Email</string>
+    <string name="incorrect_email_format">Incorrect email format</string>
 </resources>
