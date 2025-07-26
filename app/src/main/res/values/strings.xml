@@ -13,6 +13,7 @@
     <string name="long_username_error">Username must be at most %1$d characters long.</string>
     <string name="short_password_error">Password must be at least %1$d characters long.</string>
     <string name="long_password_error">Password must be at most %1$d characters long.</string>
+    <string name="passwords_do_not_match">Passwords do not match.</string>
     <string name="email">Email</string>
     <string name="switch_visibility">Switch visibility</string>
 

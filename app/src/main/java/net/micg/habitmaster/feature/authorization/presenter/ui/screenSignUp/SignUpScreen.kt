@@ -7,9 +7,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Email
-import androidx.compose.material.icons.rounded.Lock
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
@@ -19,15 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import net.micg.habitmaster.R
 import net.micg.habitmaster.data.state.DataState
 import net.micg.habitmaster.feature.authorization.presenter.ui.components.ExternalAuthorizations
 import net.micg.habitmaster.feature.authorization.presenter.ui.components.ValidatingOutlinedPasswordField
 import net.micg.habitmaster.feature.authorization.presenter.ui.components.ValidatingOutlinedTextField
-import net.micg.habitmaster.feature.authorization.presenter.ui.components.VisibilityButton
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -42,55 +39,60 @@ fun SignUpScreen(
     horizontalAlignment = Alignment.CenterHorizontally,
     verticalArrangement = Arrangement.Center
 ) {
+    Spacer(Modifier.height(120.dp))
+
     ValidatingOutlinedTextField(
-        value = viewModel.username,
+        value = viewModel.username.value,
         keyboardType = KeyboardType.Unspecified,
         label = stringResource(R.string.username),
-        errorMessage = viewModel.usernameError.asStringResource(),
-        validatorHasErrors = viewModel.usernameError.isError,
-        updateState = { viewModel.username = it },
+        errorMessage = viewModel.username.errorMessage(),
+        validatorHasErrors = viewModel.username.hasError,
+        updateState = { viewModel.username.value = it },
         icon = Icons.Rounded.Person
     )
 
     Spacer(Modifier.height(4.dp))
 
     ValidatingOutlinedTextField(
-        value = viewModel.email,
+        value = viewModel.email.value,
         keyboardType = KeyboardType.Email,
         label = stringResource(R.string.email),
         errorMessage = stringResource(R.string.incorrect_email_format),
-        validatorHasErrors = viewModel.emailHasErrors,
-        updateState = { viewModel.email = it },
+        validatorHasErrors = viewModel.email.hasError,
+        updateState = { viewModel.email.value = it },
         icon = Icons.Rounded.Email
     )
 
     Spacer(Modifier.height(4.dp))
 
     ValidatingOutlinedPasswordField(
-        value = viewModel.password,
+        value = viewModel.password.value,
         label = stringResource(R.string.password),
         isVisible = viewModel.isPasswordsVisible,
-        lengthError = viewModel.passwordError,
-        updateState = { viewModel.password = it },
+        errorMessage = viewModel.password.errorMessage(),
+        validatorHasErrors = viewModel.password.hasError,
+        updateState = { viewModel.password.value = it },
         onPasswordVisibilityChanged = { viewModel.isPasswordsVisible = it }
     )
 
     Spacer(Modifier.height(4.dp))
 
     ValidatingOutlinedPasswordField(
-        value = viewModel.confirmPassword,
+        value = viewModel.confirmPassword.value,
         label = stringResource(R.string.confirm_password),
         isVisible = viewModel.isPasswordsVisible,
-        lengthError = viewModel.confirmPasswordError,
-        updateState = { viewModel.confirmPassword = it },
+        errorMessage = viewModel.confirmPassword.errorMessage(),
+        validatorHasErrors = viewModel.confirmPassword.hasError,
+        updateState = { viewModel.confirmPassword.value = it },
         onPasswordVisibilityChanged = { viewModel.isPasswordsVisible = it }
     )
 
-    Spacer(Modifier.height(12.dp))
+    Spacer(Modifier.height(64.dp))
 
     Button(
         onClick = viewModel::signUp,
         enabled = viewModel.isFormValid,
+        shape = RoundedCornerShape(12.dp),
         modifier = Modifier.fillMaxWidth()
     ) {
         Text(stringResource(R.string.sign_up))
