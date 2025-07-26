@@ -4,9 +4,12 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import net.micg.habitmaster.feature.authorization.domain.interfaces.SignInUseCase
 import net.micg.habitmaster.utils.StringUtils
 
-class SignInViewModel() : ViewModel() {
+class SignInViewModel(
+    private val singInUseCase: SignInUseCase
+) : ViewModel() {
     var login by mutableStateOf(StringUtils.EMPTY_STRING)
         private set
 
@@ -26,10 +29,6 @@ class SignInViewModel() : ViewModel() {
 
     fun onSignInClick() {
         println("Sign In with login=$login, password=$password")
-    }
-
-    fun onSignUpClick() {
-        println("Navigate to Sign Up")
     }
 
     fun onGoogleAuthClick() {

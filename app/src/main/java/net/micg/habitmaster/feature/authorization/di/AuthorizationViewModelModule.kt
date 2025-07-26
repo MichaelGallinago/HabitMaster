@@ -8,15 +8,13 @@ import org.koin.dsl.module
 object AuthorizationViewModelModule {
     val viewModelModule = module {
         viewModel<SignInViewModel> {
-            SignInViewModel(
-
-            )
+            SignInViewModel(singInUseCase = get())
         }
 
         viewModel<SignUpViewModel> {
-            SignUpViewModel(
-
-            )
+            SignUpViewModel(singUpUseCase = get())
         }
     }
+
+
 }

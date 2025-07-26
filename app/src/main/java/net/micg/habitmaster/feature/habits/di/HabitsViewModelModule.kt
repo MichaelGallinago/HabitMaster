@@ -7,16 +7,6 @@ import org.koin.dsl.module
 
 object HabitsViewModelModule {
     val viewModelModule = module {
-        viewModel<SignInViewModel> {
-            SignInViewModel(
 
-            )
-        }
-
-        viewModel<SignUpViewModel> {
-            SignUpViewModel(
-
-            )
-        }
     }
 }

@@ -1,0 +1,33 @@
+package net.micg.habitmaster.feature.authorization.presenter.ui.components
+
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Lock
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
+import net.micg.habitmaster.presenter.model.LengthError
+import net.micg.habitmaster.utils.StringUtils
+
+@Composable
+@Preview
+fun ValidatingOutlinedPasswordField(
+    value: String = StringUtils.EMPTY_STRING,
+    label: String = StringUtils.EMPTY_STRING,
+    isVisible: Boolean = false,
+    lengthError: LengthError = LengthError(false),
+    updateState: (String) -> Unit = {},
+    onPasswordVisibilityChanged: (Boolean) -> Unit = {},
+) = ValidatingOutlinedTextField(
+    value = value,
+    keyboardType = KeyboardType.Password,
+    label = label,
+    errorMessage = lengthError.asStringResource(),
+    validatorHasErrors = lengthError.isError,
+    visualTransformation =
+        if (isVisible) VisualTransformation.None else PasswordVisualTransformation(),
+    updateState = updateState,
+    icon = Icons.Rounded.Lock,
+    trailingIcon = { VisibilityButton(isVisible, onPasswordVisibilityChanged) }
+)

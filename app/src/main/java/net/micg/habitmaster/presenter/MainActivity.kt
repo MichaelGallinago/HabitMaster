@@ -1,4 +1,4 @@
-package net.micg.habitmaster.utils
+package net.micg.habitmaster.presenter
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -8,22 +8,17 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import net.micg.habitmaster.feature.authorization.presenter.ui.screenSignIn.SignInScreen
-import net.micg.habitmaster.feature.authorization.presenter.ui.screenSignIn.SignInViewModel
+import net.micg.habitmaster.presenter.navigation.AppNavigator
 import net.micg.habitmaster.presenter.theme.HabitMasterTheme
-import org.koin.androidx.viewmodel.ext.android.viewModel
-import kotlin.getValue
 
 class MainActivity : ComponentActivity() {
-    private val viewModel: SignInViewModel by viewModel()
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             HabitMasterTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    SignInScreen(viewModel, Modifier.padding(innerPadding))
+                Scaffold(modifier = Modifier.Companion.fillMaxSize()) { innerPadding ->
+                    AppNavigator(Modifier.Companion.padding(innerPadding))
                 }
             }
         }

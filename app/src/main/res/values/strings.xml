@@ -5,6 +5,18 @@
     <string name="sign_up">Sign Up</string>
     <string name="sign_in">Sign In</string>
     <string name="password">Password</string>
-    <string name="login">Login</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="username">Username</string>
     <string name="logo">Logo</string>
+    <string name="incorrect_email_format">Incorrect email format.</string>
+    <string name="short_username_error">Username must be at least %1$d characters long.</string>
+    <string name="long_username_error">Username must be at most %1$d characters long.</string>
+    <string name="short_password_error">Password must be at least %1$d characters long.</string>
+    <string name="long_password_error">Password must be at most %1$d characters long.</string>
+    <string name="email">Email</string>
+    <string name="switch_visibility">Switch visibility</string>
+
+    <string name="response_body_is_null">Response body is null</string>
+    <string name="unknown_error">Unknown error</string>
+    <string name="data_was_null">Data was null</string>
 </resources>

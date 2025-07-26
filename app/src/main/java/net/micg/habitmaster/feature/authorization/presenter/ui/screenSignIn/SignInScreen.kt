@@ -15,13 +15,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import net.micg.habitmaster.R
+import net.micg.habitmaster.di.PreviewDI
 import net.micg.habitmaster.feature.authorization.presenter.ui.components.AppLogo
 import net.micg.habitmaster.feature.authorization.presenter.ui.components.ExternalAuthorizations
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
-fun SignInScreen(viewModel: SignInViewModel, modifier: Modifier = Modifier) = Column(
+fun SignInScreen(
+    modifier: Modifier = Modifier,
+    viewModel: SignInViewModel = koinViewModel(),
+    onSignIn: () -> Unit = {},
+    onSignUpClicked: () -> Unit = {},
+) = Column(
     modifier = modifier
         .fillMaxSize()
         .padding(24.dp),
@@ -30,11 +38,10 @@ fun SignInScreen(viewModel: SignInViewModel, modifier: Modifier = Modifier) = Co
 ) {
     AppLogo()
 
-
     OutlinedTextField(
         value = viewModel.login,
         onValueChange = viewModel::onLoginChange,
-        label = { Text(stringResource(R.string.login)) },
+        label = { Text(stringResource(R.string.username)) },
         modifier = Modifier.fillMaxWidth()
     )
 
@@ -61,7 +68,7 @@ fun SignInScreen(viewModel: SignInViewModel, modifier: Modifier = Modifier) = Co
     Spacer(Modifier.height(8.dp))
 
     Button(
-        onClick = viewModel::onSignUpClick,
+        onClick = onSignUpClicked,
         modifier = Modifier.fillMaxWidth()
     ) {
         Text(stringResource(R.string.sign_up))
