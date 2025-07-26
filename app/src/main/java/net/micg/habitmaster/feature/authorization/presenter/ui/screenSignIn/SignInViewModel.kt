@@ -5,11 +5,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import net.micg.habitmaster.R
 import net.micg.habitmaster.data.state.DataState
 import net.micg.habitmaster.feature.authorization.domain.interfaces.SignInUseCase
 import net.micg.habitmaster.presenter.model.FieldValidators.validateLength
 import net.micg.habitmaster.presenter.model.ValidatedField
+import net.micg.habitmaster.utils.MutexExtensions.tryWithLock
 import net.micg.habitmaster.utils.StringUtils
 
 class SignInViewModel(
@@ -26,19 +32,27 @@ class SignInViewModel(
     )
 
     val isFormValid by derivedStateOf {
-        username.value.isNotBlank() && username.isValid &&
-        password.value.isNotBlank() && password.isValid
+        username.isValidAndNotBlank && password.isValidAndNotBlank
     }
 
-    fun onSignInClick() {
-        println("Sign In with login=${username.value}, password=${password.value}")
+    private val mutex = Mutex()
+
+    fun signIn() = mutex.tryWithLock {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (!isFormValid) return@launch
+            signInState = singInUseCase(username.value, password.value)
+        }
     }
 
-    fun onGoogleAuthClick() {
-        println("Google Auth Clicked")
+    fun authViaGoogle() = mutex.tryWithLock {
+        viewModelScope.launch(Dispatchers.IO) {
+            println("Google Auth Clicked")
+        }
     }
 
-    fun onTelegramAuthClick() {
-        println("Telegram Auth Clicked")
+    fun authViaTelegram() = mutex.tryWithLock {
+        viewModelScope.launch(Dispatchers.IO) {
+            println("Telegram Auth Clicked")
+        }
     }
 }

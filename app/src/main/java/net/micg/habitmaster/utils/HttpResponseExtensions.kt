@@ -3,7 +3,7 @@ package net.micg.habitmaster.utils
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 
-object HttpResponseUtils {
+object HttpResponseExtensions {
     suspend inline fun <reified T> HttpResponse.toResult(): Result<T> {
         if (!isSuccessful) return toFailure()
 

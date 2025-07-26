@@ -67,7 +67,7 @@ fun SignInScreen(
     Spacer(Modifier.height(24.dp))
 
     Button(
-        onClick = viewModel::onSignInClick,
+        onClick = viewModel::signIn,
         enabled = viewModel.isFormValid,
         shape = RoundedCornerShape(12.dp),
         modifier = Modifier.fillMaxWidth()
@@ -93,5 +93,5 @@ fun SignInScreen(
 
     Spacer(Modifier.height(32.dp))
 
-    ExternalAuthorizations(viewModel::onGoogleAuthClick, viewModel::onTelegramAuthClick)
+    ExternalAuthorizations(viewModel::authViaGoogle, viewModel::authViaTelegram)
 }

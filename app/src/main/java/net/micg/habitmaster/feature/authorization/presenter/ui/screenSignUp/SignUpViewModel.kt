@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.Mutex
 import net.micg.habitmaster.R
 import net.micg.habitmaster.data.state.DataState
 import net.micg.habitmaster.feature.authorization.domain.interfaces.SignUpUseCase
@@ -15,6 +16,7 @@ import net.micg.habitmaster.presenter.model.FieldValidators.validateEmail
 import net.micg.habitmaster.presenter.model.FieldValidators.validateLength
 import net.micg.habitmaster.presenter.model.FieldValidators.validateMatch
 import net.micg.habitmaster.presenter.model.ValidatedField
+import net.micg.habitmaster.utils.MutexExtensions.tryWithLock
 import net.micg.habitmaster.utils.StringUtils
 
 class SignUpViewModel(
@@ -38,23 +40,31 @@ class SignUpViewModel(
     )
 
     val isFormValid by derivedStateOf {
-        username.value.isNotBlank() && username.isValid &&
-        email.value.isNotBlank() && email.isValid &&
-        password.value.isNotBlank() && password.isValid &&
-        confirmPassword.value.isNotBlank() && confirmPassword.isValid &&
+        username.isValidAndNotBlank &&
+        email.isValidAndNotBlank &&
+        password.isValidAndNotBlank &&
+        confirmPassword.isValidAndNotBlank &&
         confirmPassword.value == password.value
     }
 
-    fun signUp() = viewModelScope.launch(Dispatchers.IO) {
-        if (!isFormValid) return@launch
-        signUpState = singUpUseCase(username.value, password.value)
+    private val mutex = Mutex()
+
+    fun signUp() = mutex.tryWithLock {
+        viewModelScope.launch(Dispatchers.IO) {
+            if (!isFormValid) return@launch
+            signUpState = singUpUseCase(username.value, password.value)
+        }
     }
 
-    fun onGoogleAuthClick() {
-        println("Google Auth Clicked")
+    fun authViaGoogle() = mutex.tryWithLock {
+        viewModelScope.launch(Dispatchers.IO) {
+            println("Google Auth Clicked")
+        }
     }
 
-    fun onTelegramAuthClick() {
-        println("Telegram Auth Clicked")
+    fun authViaTelegram() = mutex.tryWithLock {
+        viewModelScope.launch(Dispatchers.IO) {
+            println("Telegram Auth Clicked")
+        }
     }
 }

@@ -3,6 +3,8 @@ package net.micg.habitmaster.feature.authorization.presenter.ui.components
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Lock
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -27,6 +29,7 @@ fun ValidatingOutlinedPasswordField(
     validatorHasErrors = validatorHasErrors,
     visualTransformation =
         if (isVisible) VisualTransformation.None else PasswordVisualTransformation(),
+    textStyle = TextStyle(fontFamily = FontFamily.Monospace),
     updateState = updateState,
     icon = Icons.Rounded.Lock,
     trailingIcon = { VisibilityButton(isVisible, onPasswordVisibilityChanged) }

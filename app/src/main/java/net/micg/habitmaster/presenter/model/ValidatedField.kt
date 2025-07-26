@@ -18,6 +18,7 @@ class ValidatedField(
     var value by mutableStateOf(initialValue)
     val hasError get() = validationResult.isError
     val isValid get() = !validationResult.isError
+    val isValidAndNotBlank get() = !validationResult.isError && value.isNotBlank()
 
     private val validationResult by derivedStateOf {
         validators.firstOrNull { it(value).isError }?.invoke(value) ?: ValidationResult(false)
