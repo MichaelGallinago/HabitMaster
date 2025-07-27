@@ -47,12 +47,14 @@ class SignInViewModel(
     fun authViaGoogle() = mutex.tryWithLock {
         viewModelScope.launch(Dispatchers.IO) {
             println("Google Auth Clicked")
+            signInState = DataState.Success(Unit)
         }
     }
 
     fun authViaTelegram() = mutex.tryWithLock {
         viewModelScope.launch(Dispatchers.IO) {
             println("Telegram Auth Clicked")
+            signInState = DataState.Success(Unit)
         }
     }
 }

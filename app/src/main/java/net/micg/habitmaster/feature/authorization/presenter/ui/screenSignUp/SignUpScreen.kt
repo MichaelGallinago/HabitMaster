@@ -106,5 +106,5 @@ fun SignUpScreen(
 
     Spacer(Modifier.height(32.dp))
 
-    ExternalAuthorizations(viewModel::onGoogleAuthClick, viewModel::onTelegramAuthClick)
+    ExternalAuthorizations(viewModel::authViaGoogle, viewModel::authViaTelegram)
 }
