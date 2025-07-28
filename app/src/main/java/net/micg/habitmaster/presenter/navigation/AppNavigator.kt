@@ -12,9 +12,12 @@ import net.micg.habitmaster.feature.habits.presenter.ui.screenCreateHabit.Create
 import net.micg.habitmaster.feature.habits.presenter.ui.screenHabitList.HabitListScreen
 
 @Composable
-fun AppNavigator(modifier: Modifier = Modifier) {
+fun AppNavigator(
+    modifier: Modifier = Modifier,
+    startDestination: String = Destinations.HABIT_LIST
+) {
     val navController = rememberNavController()
-    NavHost(navController, startDestination = Destinations.SIGN_IN) {
+    NavHost(navController, startDestination) {
         composable(Destinations.SIGN_IN) {
             SignInScreen(
                 modifier = modifier,

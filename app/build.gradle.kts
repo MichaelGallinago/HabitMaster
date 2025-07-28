@@ -104,6 +104,9 @@ dependencies {
 
     // Navigation
     implementation(libs.androidx.navigation.compose)
+
+    // Data Store
+    implementation(libs.androidx.datastore.preferences)
 }
 
 fun getLocalProperties() = Properties().apply {

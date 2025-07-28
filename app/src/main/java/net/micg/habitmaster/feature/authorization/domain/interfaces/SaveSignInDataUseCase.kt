@@ -1,8 +1,7 @@
 package net.micg.habitmaster.feature.authorization.domain.interfaces
 
-import net.micg.habitmaster.data.state.DataState
 import net.micg.habitmaster.feature.authorization.presenter.model.SignInDataUi
 
-fun interface SignInUseCase {
-    suspend operator fun invoke(data: SignInDataUi): DataState<Unit>
+fun interface SaveSignInDataUseCase {
+    suspend operator fun invoke(data: SignInDataUi)
 }
