@@ -19,7 +19,9 @@ import net.micg.habitmaster.presenter.model.FieldValidators.validateLength
 import net.micg.habitmaster.presenter.model.ValidatedField
 import net.micg.habitmaster.utils.MutexExtensions.tryWithLock
 import net.micg.habitmaster.utils.StringUtils
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class SignInViewModel(
     private val signInUseCase: SignInUseCase,
     private val signInViaGoogleUseCase: SignInViaGoogleUseCase,

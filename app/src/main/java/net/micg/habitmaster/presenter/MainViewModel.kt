@@ -11,7 +11,9 @@ import net.micg.habitmaster.data.state.DataState
 import net.micg.habitmaster.feature.authorization.domain.interfaces.GetSignInDataUseCase
 import net.micg.habitmaster.feature.authorization.domain.interfaces.SignInUseCase
 import net.micg.habitmaster.presenter.navigation.Destinations
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class MainViewModel(
     private val getSignInDataUseCase: GetSignInDataUseCase,
     private val signInUseCase: SignInUseCase

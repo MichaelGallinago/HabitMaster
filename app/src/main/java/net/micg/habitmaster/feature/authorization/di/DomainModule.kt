@@ -1,5 +1,8 @@
 package net.micg.habitmaster.feature.authorization.di
 
+import android.content.Context
+import net.micg.habitmaster.feature.authorization.data.authRepository.AuthRepository
+import net.micg.habitmaster.feature.authorization.data.userRepository.UserRepository
 import net.micg.habitmaster.feature.authorization.domain.implementations.GetSignInDataUseCaseImpl
 import net.micg.habitmaster.feature.authorization.domain.implementations.SaveSignInDataUseCaseImpl
 import net.micg.habitmaster.feature.authorization.domain.implementations.SignInUseCaseImpl
@@ -10,33 +13,37 @@ import net.micg.habitmaster.feature.authorization.domain.interfaces.SaveSignInDa
 import net.micg.habitmaster.feature.authorization.domain.interfaces.SignInUseCase
 import net.micg.habitmaster.feature.authorization.domain.interfaces.SignInViaGoogleUseCase
 import net.micg.habitmaster.feature.authorization.domain.interfaces.SignUpUseCase
+import org.koin.core.annotation.Module
+import org.koin.core.annotation.Single
 import org.koin.dsl.module
 
-object DomainModule {
-    val domainModule = module {
-        single<SignInUseCase> {
-            SignInUseCaseImpl(
-                repository = get(),
-                context = get()
-            )
-        }
-        single<SignInViaGoogleUseCase> {
-            SignInViaGoogleUseCaseImpl(
-                repository = get(),
-                context = get()
-            )
-        }
-        single<SignUpUseCase> {
-            SignUpUseCaseImpl(
-                repository = get(),
-                context = get()
-            )
-        }
-        single<SaveSignInDataUseCase> {
-            SaveSignInDataUseCaseImpl(userRepository = get())
-        }
-        single<GetSignInDataUseCase> {
-            GetSignInDataUseCaseImpl(userRepository = get())
-        }
-    }
+@Module
+class DomainModule {
+    @Single
+    fun provideSignInUseCase(
+        repository: AuthRepository,
+        context: Context
+    ): SignInUseCase = SignInUseCaseImpl(repository, context)
+
+    @Single
+    fun provideSignInViaGoogleUseCase(
+        repository: AuthRepository,
+        context: Context
+    ): SignInViaGoogleUseCase = SignInViaGoogleUseCaseImpl(repository, context)
+
+    @Single
+    fun provideSignUpUseCase(
+        repository: AuthRepository,
+        context: Context
+    ): SignUpUseCase = SignUpUseCaseImpl(repository, context)
+
+    @Single
+    fun provideSaveSignInDataUseCase(
+        userRepository: UserRepository
+    ): SaveSignInDataUseCase = SaveSignInDataUseCaseImpl(userRepository)
+
+    @Single
+    fun provideGetSignInDataUseCase(
+        userRepository: UserRepository
+    ): GetSignInDataUseCase = GetSignInDataUseCaseImpl(userRepository)
 }

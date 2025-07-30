@@ -1,9 +1,8 @@
 package net.micg.habitmaster.feature.habits.di
 
-import net.micg.habitmaster.feature.habits.di.HabitsViewModelModule.viewModelModule
-import net.micg.habitmaster.feature.habits.di.DataModule.dataModule
-import net.micg.habitmaster.feature.habits.di.DomainModule.domainModule
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-object HabitsModule {
-    val habitsModules = viewModelModule + dataModule + domainModule
-}
+@Module([DataModule::class, DomainModule::class])
+@ComponentScan("net.micg.habitmaster.feature.habits")
+class HabitsModule

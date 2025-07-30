@@ -1,9 +1,8 @@
 package net.micg.habitmaster.feature.habits.di
 
-import org.koin.dsl.module
+import org.koin.core.annotation.Module
 
-object DomainModule {
-    val domainModule = module {
-        
-    }
+@Module
+class DomainModule {
+
 }

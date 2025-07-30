@@ -6,7 +6,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import net.micg.habitmaster.utils.StringUtils
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class CreateHabitViewModel(
 
 ) : ViewModel() {

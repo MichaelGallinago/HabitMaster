@@ -21,7 +21,9 @@ import net.micg.habitmaster.presenter.model.FieldValidators.validateMatch
 import net.micg.habitmaster.presenter.model.ValidatedField
 import net.micg.habitmaster.utils.MutexExtensions.tryWithLock
 import net.micg.habitmaster.utils.StringUtils
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class SignUpViewModel(
     private val singUpUseCase: SignUpUseCase,
     private val saveSignInDataUseCase: SaveSignInDataUseCase

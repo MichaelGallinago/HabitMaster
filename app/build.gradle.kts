@@ -95,9 +95,11 @@ dependencies {
     implementation(libs.androidx.room.ktx)
 
     // Koin Di
-    implementation(libs.koin.koin.core)
+    implementation(libs.koin.core)
     implementation(libs.koin.androidx.compose)
     implementation(libs.koin.androidx.compose.navigation)
+    implementation(libs.koin.annotations)
+    ksp(libs.koin.ksp.compiler)
 
     // Ktor
     implementation(libs.ktor.client.core)
@@ -124,6 +126,10 @@ dependencies {
 
     // Koil
     implementation(libs.coil.compose)
+}
+
+ksp {
+    arg("KOIN_CONFIG_CHECK","true")
 }
 
 fun getLocalProperties() = Properties().apply {

@@ -4,7 +4,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import net.micg.habitmaster.feature.habits.presenter.models.HabitUi
+import org.koin.android.annotation.KoinViewModel
 
+@KoinViewModel
 class HabitListViewModel(
 
 ) : ViewModel() {

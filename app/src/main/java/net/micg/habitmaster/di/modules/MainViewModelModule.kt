@@ -1,16 +1,8 @@
 package net.micg.habitmaster.di.modules
 
-import net.micg.habitmaster.presenter.MainViewModel
-import org.koin.core.module.dsl.viewModel
-import org.koin.dsl.module
+import org.koin.core.annotation.ComponentScan
+import org.koin.core.annotation.Module
 
-object MainViewModelModule {
-    val viewModelModule = module {
-        viewModel<MainViewModel> {
-            MainViewModel(
-                getSignInDataUseCase = get(),
-                signInUseCase = get()
-            )
-        }
-    }
-}
+@Module
+@ComponentScan("net.micg.habitmaster.presenter")
+class MainViewModelModule
