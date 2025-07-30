@@ -6,7 +6,9 @@ import net.micg.habitmaster.feature.authorization.data.authRepository.AuthReposi
 import net.micg.habitmaster.feature.authorization.data.model.SignUpData
 import net.micg.habitmaster.feature.authorization.domain.interfaces.SignUpUseCase
 import net.micg.habitmaster.feature.authorization.presenter.model.SignUpDataUi
+import org.koin.core.annotation.Single
 
+@Single
 class SignUpUseCaseImpl(
     private val repository: AuthRepository,
     private val context: Context

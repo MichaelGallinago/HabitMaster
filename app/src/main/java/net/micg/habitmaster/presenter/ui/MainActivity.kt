@@ -1,4 +1,4 @@
-package net.micg.habitmaster.presenter
+package net.micg.habitmaster.presenter.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity

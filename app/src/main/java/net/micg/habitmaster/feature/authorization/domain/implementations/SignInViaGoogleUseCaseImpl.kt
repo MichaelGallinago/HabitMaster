@@ -5,7 +5,9 @@ import net.micg.habitmaster.data.state.DataState
 import net.micg.habitmaster.data.state.DataState.Companion.toDataState
 import net.micg.habitmaster.feature.authorization.data.authRepository.AuthRepository
 import net.micg.habitmaster.feature.authorization.domain.interfaces.SignInViaGoogleUseCase
+import org.koin.core.annotation.Single
 
+@Single
 class SignInViaGoogleUseCaseImpl(
     private val repository: AuthRepository,
     private val context: Context

@@ -1,8 +1,8 @@
-package net.micg.habitmaster.di.modules
+package net.micg.habitmaster.presenter.ui
 
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 
 @Module
-@ComponentScan("net.micg.habitmaster.presenter")
+@ComponentScan
 class MainViewModelModule

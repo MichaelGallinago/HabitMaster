@@ -1,4 +1,4 @@
-package net.micg.habitmaster.feature.habits.presenter.models
+package net.micg.habitmaster.feature.habits.presenter.model
 
 data class HabitUi(
     val id: Int,

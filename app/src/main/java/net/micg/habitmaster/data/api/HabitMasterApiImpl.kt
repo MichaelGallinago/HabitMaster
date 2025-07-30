@@ -7,7 +7,9 @@ import net.micg.habitmaster.BuildConfig
 import net.micg.habitmaster.feature.authorization.data.model.FirebaseIdToken
 import net.micg.habitmaster.feature.authorization.data.model.SignInData
 import net.micg.habitmaster.feature.authorization.data.model.SignUpData
+import org.koin.core.annotation.Single
 
+@Single
 class HabitMasterApiImpl(private val client: HttpClient) : HabitMasterApi {
     override suspend fun signIn(request: SignInData) =
         client.post(SIGN_IN) { setBody(request) }

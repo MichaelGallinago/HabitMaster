@@ -1,4 +1,4 @@
-package net.micg.habitmaster.feature.authorization.di
+package net.micg.habitmaster.feature.authorization.data
 
 import android.content.Context
 import androidx.datastore.preferences.core.stringPreferencesKey
@@ -7,14 +7,13 @@ import net.micg.habitmaster.feature.authorization.data.authRepository.AuthReposi
 import net.micg.habitmaster.feature.authorization.data.authRepository.AuthRepositoryImpl
 import net.micg.habitmaster.feature.authorization.data.userRepository.UserRepository
 import net.micg.habitmaster.feature.authorization.data.userRepository.UserRepositoryImpl
+import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
+@ComponentScan
 class DataModule {
-    @Single
-    fun provideAuthRepository(api: HabitMasterApi): AuthRepository = AuthRepositoryImpl(api)
-
     @Single
     fun provideUserRepository(context: Context): UserRepository =
         UserRepositoryImpl(context, usernameKey, passwordKey)

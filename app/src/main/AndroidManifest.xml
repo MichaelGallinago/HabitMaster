@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.HabitMaster">
         <activity
-            android:name=".presenter.MainActivity"
+            android:name=".presenter.ui.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.HabitMaster">
             <intent-filter>

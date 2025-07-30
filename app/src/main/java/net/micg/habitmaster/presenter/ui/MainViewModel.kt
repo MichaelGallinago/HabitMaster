@@ -1,4 +1,4 @@
-package net.micg.habitmaster.presenter
+package net.micg.habitmaster.presenter.ui
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
