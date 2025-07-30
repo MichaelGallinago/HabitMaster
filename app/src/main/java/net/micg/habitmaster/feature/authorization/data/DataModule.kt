@@ -1,12 +1,8 @@
 package net.micg.habitmaster.feature.authorization.data
 
-import android.content.Context
 import androidx.datastore.preferences.core.stringPreferencesKey
-import net.micg.habitmaster.data.api.HabitMasterApi
-import net.micg.habitmaster.feature.authorization.data.authRepository.AuthRepository
-import net.micg.habitmaster.feature.authorization.data.authRepository.AuthRepositoryImpl
-import net.micg.habitmaster.feature.authorization.data.userRepository.UserRepository
-import net.micg.habitmaster.feature.authorization.data.userRepository.UserRepositoryImpl
+import net.micg.habitmaster.feature.authorization.data.userRepository.PasswordKey
+import net.micg.habitmaster.feature.authorization.data.userRepository.UsernameKey
 import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
@@ -15,11 +11,8 @@ import org.koin.core.annotation.Single
 @ComponentScan
 class DataModule {
     @Single
-    fun provideUserRepository(context: Context): UserRepository =
-        UserRepositoryImpl(context, usernameKey, passwordKey)
+    fun providePasswordKey() = PasswordKey(stringPreferencesKey(PasswordKey::class.java.simpleName))
 
-    companion object {
-        private val usernameKey = stringPreferencesKey("username")
-        private val passwordKey = stringPreferencesKey("password")
-    }
+    @Single
+    fun provideUsernameKey() = UsernameKey(stringPreferencesKey(UsernameKey::class.java.simpleName))
 }

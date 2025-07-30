@@ -8,22 +8,24 @@ import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import net.micg.habitmaster.feature.authorization.data.model.SignInData
 import net.micg.habitmaster.utils.StringUtils
+import org.koin.core.annotation.Single
 
+@Single
 class UserRepositoryImpl(
     private val context: Context,
-    private val usernamePreferencesKey: Preferences.Key<String>,
-    private val passwordPreferencesKey: Preferences.Key<String>,
+    private val usernameKey: UsernameKey,
+    private val passwordKey: PasswordKey,
 ) : UserRepository {
-    private val Context.dataStore by preferencesDataStore(name = REPOSITORY_NAME)
+    private val Context.dataStore by preferencesDataStore(UserRepository::class.java.simpleName)
 
     override suspend fun setUserData(data: SignInData) {
-        setPreferences(usernamePreferencesKey, data.username)
-        setPreferences(passwordPreferencesKey, data.password)
+        setPreferences(usernameKey.value, data.username)
+        setPreferences(passwordKey.value, data.password)
     }
 
     override suspend fun getUserData() = SignInData(
-        getPreferences(usernamePreferencesKey) ?: StringUtils.EMPTY_STRING,
-        getPreferences(passwordPreferencesKey) ?: StringUtils.EMPTY_STRING
+        getPreferences(usernameKey.value) ?: StringUtils.EMPTY_STRING,
+        getPreferences(passwordKey.value) ?: StringUtils.EMPTY_STRING
     )
 
     override suspend fun clearUserData() =

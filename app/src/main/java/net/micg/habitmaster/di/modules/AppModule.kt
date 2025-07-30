@@ -5,5 +5,5 @@ import net.micg.habitmaster.feature.habits.HabitsModule
 import net.micg.habitmaster.feature.social.SocialModule
 import org.koin.core.annotation.Module
 
-@Module([AuthorizationModule::class, HabitsModule::class, SocialModule::class])
+@Module(includes = [AuthorizationModule::class, HabitsModule::class, SocialModule::class])
 class AppModule

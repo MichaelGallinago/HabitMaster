@@ -18,13 +18,16 @@ import kotlinx.serialization.json.Json
 import net.micg.habitmaster.data.api.HabitMasterApi
 import net.micg.habitmaster.data.api.HabitMasterApiImpl
 import net.micg.habitmaster.data.model.CacheInterceptor
+import org.koin.core.annotation.ComponentScan
 import org.koin.core.annotation.Module
 import org.koin.core.annotation.Single
 
 @Module
+@ComponentScan
 class NetworkModule {
     @Single
-    fun provideHabitMasterApi(client: HttpClient): HabitMasterApi = HabitMasterApiImpl(client)
+    fun provideHabitMasterApi(httpClient: HttpClient): HabitMasterApi =
+        HabitMasterApiImpl(httpClient)
 
     @Single
     fun provideHttpClient(): HttpClient = HttpClient(OkHttp) {
