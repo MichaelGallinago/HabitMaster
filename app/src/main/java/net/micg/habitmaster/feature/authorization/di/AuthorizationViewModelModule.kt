@@ -9,7 +9,8 @@ object AuthorizationViewModelModule {
     val viewModelModule = module {
         viewModel<SignInViewModel> {
             SignInViewModel(
-                singInUseCase = get(),
+                signInUseCase = get(),
+                signInViaGoogleUseCase = get(),
                 saveSignInDataUseCase = get()
             )
         }

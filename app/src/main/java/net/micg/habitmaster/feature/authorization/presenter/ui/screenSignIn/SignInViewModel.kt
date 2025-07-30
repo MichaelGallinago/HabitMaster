@@ -13,6 +13,7 @@ import net.micg.habitmaster.R
 import net.micg.habitmaster.data.state.DataState
 import net.micg.habitmaster.feature.authorization.domain.interfaces.SaveSignInDataUseCase
 import net.micg.habitmaster.feature.authorization.domain.interfaces.SignInUseCase
+import net.micg.habitmaster.feature.authorization.domain.interfaces.SignInViaGoogleUseCase
 import net.micg.habitmaster.feature.authorization.presenter.model.SignInDataUi
 import net.micg.habitmaster.presenter.model.FieldValidators.validateLength
 import net.micg.habitmaster.presenter.model.ValidatedField
@@ -20,7 +21,8 @@ import net.micg.habitmaster.utils.MutexExtensions.tryWithLock
 import net.micg.habitmaster.utils.StringUtils
 
 class SignInViewModel(
-    private val singInUseCase: SignInUseCase,
+    private val signInUseCase: SignInUseCase,
+    private val signInViaGoogleUseCase: SignInViaGoogleUseCase,
     private val saveSignInDataUseCase: SaveSignInDataUseCase,
 ) : ViewModel() {
     var isPasswordVisible by mutableStateOf(false)
@@ -54,7 +56,7 @@ class SignInViewModel(
             if (!isFormValid) return@launch
 
             val data = SignInDataUi(username.value, password.value)
-            val state = singInUseCase(data)
+            val state = signInUseCase(data)
 
             if (state is DataState.Success)
                 saveSignInDataUseCase(data)
@@ -65,8 +67,11 @@ class SignInViewModel(
 
     fun authViaGoogle() = mutex.tryWithLock {
         viewModelScope.launch(Dispatchers.IO) {
-            println("Google Auth Clicked")
-            signInState = DataState.Success(Unit)
+            if (!isFormValid) return@launch
+
+            val state = signInViaGoogleUseCase()
+
+            signInState = state
         }
     }
 

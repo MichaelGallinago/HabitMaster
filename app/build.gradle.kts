@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     id("kotlinx-serialization")
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -30,18 +31,10 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
-            buildConfigField(
-                "String",
-                "API_URL",
-                getLocalProperties().getProperty("api_url")
-            )
+            addBuildConfigData()
         }
         debug {
-            buildConfigField(
-                "String",
-                "API_URL",
-                getLocalProperties().getProperty("api_url")
-            )
+            addBuildConfigData()
         }
     }
     compileOptions {
@@ -62,6 +55,19 @@ android {
     }
 }
 
+fun com.android.build.api.dsl.ApplicationBuildType.addBuildConfigData() {
+    buildConfigField(
+        "String",
+        "API_URL",
+        getLocalProperties().getProperty("api_url")
+    )
+    buildConfigField(
+        "String",
+        "WEB_CLIENT_ID",
+        getLocalProperties().getProperty("web_client_id")
+    )
+}
+
 dependencies {
 
     implementation(libs.androidx.core.ktx)
@@ -72,6 +78,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.googleid)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
@@ -107,6 +114,16 @@ dependencies {
 
     // Data Store
     implementation(libs.androidx.datastore.preferences)
+
+    // Google Auth
+    implementation(libs.play.services.auth)
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.androidx.credentials)
+    implementation(libs.androidx.credentials.play.services.auth)
+
+    // Koil
+    implementation(libs.coil.compose)
 }
 
 fun getLocalProperties() = Properties().apply {

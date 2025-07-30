@@ -4,18 +4,20 @@ import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 
 object HttpResponseExtensions {
-    suspend inline fun <reified T> HttpResponse.toResult(): Result<T> {
-        if (!isSuccessful) return toFailure()
+    suspend inline fun <reified T> HttpResponse.toResult() =
+        if (!isSuccessful) toFailure() else when (T::class) {
+            Unit::class -> Result.success(Unit as T)
+            else -> (body() as? T)?.let {
+                Result.success(it)
+            } ?: Result.failure(Throwable(INCORRECT_DATA_ERROR_MESSAGE))
+        }
 
-        val response = body() as? T
-        if (response == null)
-            return Result.failure(Throwable(INCORRECT_DATA_ERROR_MESSAGE))
-
-        return Result.success(response)
-    }
-
-    fun HttpResponse.toResult() =
-        if (isSuccessful) Result.success(Unit) else Result.failure(Throwable(status.description))
+    suspend inline fun <reified T> callApiCatching(
+        crossinline apiCall: suspend () -> HttpResponse
+    ) = runCatching { apiCall() }.fold(
+        onSuccess = { it.toResult<T>() },
+        onFailure = { Result.failure(it) }
+    )
 
     val HttpResponse.isSuccessful
         get() = status.value in 200..299

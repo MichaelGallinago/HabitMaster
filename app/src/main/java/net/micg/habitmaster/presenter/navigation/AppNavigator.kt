@@ -10,11 +10,13 @@ import net.micg.habitmaster.feature.authorization.presenter.ui.screenSignIn.Sign
 import net.micg.habitmaster.feature.authorization.presenter.ui.screenSignUp.SignUpScreen
 import net.micg.habitmaster.feature.habits.presenter.ui.screenCreateHabit.CreateHabitScreen
 import net.micg.habitmaster.feature.habits.presenter.ui.screenHabitList.HabitListScreen
+import net.micg.habitmaster.feature.social.presenter.ui.screenFriends.FriendsScreen
+import net.micg.habitmaster.feature.social.presenter.ui.screenProfile.ProfileScreen
 
 @Composable
 fun AppNavigator(
     modifier: Modifier = Modifier,
-    startDestination: String = Destinations.HABIT_LIST
+    startDestination: String = Destinations.SIGN_IN
 ) {
     val navController = rememberNavController()
     NavHost(navController, startDestination) {
@@ -39,6 +41,12 @@ fun AppNavigator(
         }
         composable(Destinations.CREATE_HABIT) {
             CreateHabitScreen(modifier)
+        }
+        composable(Destinations.PROFILE) {
+            ProfileScreen(modifier)
+        }
+        composable(Destinations.FRIENDS) {
+            FriendsScreen(modifier)
         }
     }
 }
