@@ -25,4 +25,8 @@
     <string name="days_short">d.</string>
     <string name="name">Name</string>
     <string name="interval_in_days">Interval (in days)</string>
+    <string name="log_out">Log out</string>
+    <string name="save_changes">Save changes</string>
+    <string name="avatar">Avatar</string>
+    <string name="no_avatar">No avatar</string>
 </resources>

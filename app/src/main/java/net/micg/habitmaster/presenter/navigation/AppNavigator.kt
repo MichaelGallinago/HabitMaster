@@ -36,7 +36,8 @@ fun AppNavigator(
         composable(Destinations.HABIT_LIST) {
             HabitListScreen(
                 modifier = modifier,
-                onAddHabitClick = { navController.navigate(Destinations.CREATE_HABIT) }
+                onAddHabitClick = { navController.navigate(Destinations.CREATE_HABIT) },
+                onProfileClick = { navController.navigate(Destinations.PROFILE) }
             )
         }
         composable(Destinations.CREATE_HABIT) {

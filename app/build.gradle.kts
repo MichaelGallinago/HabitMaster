@@ -124,8 +124,10 @@ dependencies {
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play.services.auth)
 
-    // Koil
+    // Coil
     implementation(libs.coil.compose)
+
+
 }
 
 ksp {
