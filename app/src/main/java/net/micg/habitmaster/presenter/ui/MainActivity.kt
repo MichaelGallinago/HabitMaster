@@ -10,6 +10,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.micg.habitmaster.presenter.navigation.AppNavigator
+import net.micg.habitmaster.presenter.navigation.Destinations
 import net.micg.habitmaster.presenter.theme.HabitMasterTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,7 +31,7 @@ class MainActivity : ComponentActivity() {
 
         HabitMasterTheme {
             Scaffold(Modifier.fillMaxSize()) { innerPadding ->
-                AppNavigator(Modifier.padding(innerPadding), destination)
+                AppNavigator(Modifier.padding(innerPadding), Destinations.JOKES)
             }
         }
     }

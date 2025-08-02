@@ -7,4 +7,5 @@ object Destinations {
     const val CREATE_HABIT = "create_habit"
     const val PROFILE = "profile"
     const val FRIENDS = "friends"
+    const val JOKES = "jokes"
 }

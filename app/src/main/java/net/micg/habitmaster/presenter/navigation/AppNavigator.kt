@@ -2,10 +2,10 @@ package net.micg.habitmaster.presenter.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import net.micg.habitmaster.feature.authorization.presenter.ui.screenJokes.JokesScreen
 import net.micg.habitmaster.feature.authorization.presenter.ui.screenSignIn.SignInScreen
 import net.micg.habitmaster.feature.authorization.presenter.ui.screenSignUp.SignUpScreen
 import net.micg.habitmaster.feature.habits.presenter.ui.screenCreateHabit.CreateHabitScreen
@@ -40,17 +40,9 @@ fun AppNavigator(
                 onProfileClick = { navController.navigate(Destinations.PROFILE) }
             )
         }
-        composable(Destinations.CREATE_HABIT) {
-            CreateHabitScreen(modifier)
-        }
-        composable(Destinations.PROFILE) {
-            ProfileScreen(modifier)
-        }
-        composable(Destinations.FRIENDS) {
-            FriendsScreen(modifier)
-        }
+        composable(Destinations.CREATE_HABIT) { CreateHabitScreen(modifier) }
+        composable(Destinations.PROFILE) { ProfileScreen(modifier) }
+        composable(Destinations.FRIENDS) { FriendsScreen(modifier) }
+        composable(Destinations.JOKES) { JokesScreen(modifier) }
     }
 }
-
-private fun NavHostController.navigateFromAuth() =
-    navigate(Destinations.HABIT_LIST) { popUpTo(0) { inclusive = true } }

@@ -29,4 +29,6 @@
     <string name="save_changes">Save changes</string>
     <string name="avatar">Avatar</string>
     <string name="no_avatar">No avatar</string>
+    <string name="chuck_norris_icon">Chuck Norris Icon</string>
+    <string name="get_new_joke">Get new joke</string>
 </resources>

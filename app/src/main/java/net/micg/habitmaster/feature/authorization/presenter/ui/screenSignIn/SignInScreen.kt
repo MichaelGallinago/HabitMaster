@@ -21,7 +21,9 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import net.micg.habitmaster.R
 import net.micg.habitmaster.data.state.DataState
+import net.micg.habitmaster.feature.authorization.presenter.model.ChuckNorrisJokeUi
 import net.micg.habitmaster.feature.authorization.presenter.ui.components.AppLogo
+import net.micg.habitmaster.feature.authorization.presenter.ui.components.ChuckNorrisJokeItem
 import net.micg.habitmaster.feature.authorization.presenter.ui.components.ExternalAuthorizations
 import net.micg.habitmaster.feature.authorization.presenter.ui.components.ValidatingOutlinedPasswordField
 import net.micg.habitmaster.feature.authorization.presenter.ui.components.ValidatingOutlinedTextField

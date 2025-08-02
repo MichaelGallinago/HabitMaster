@@ -9,4 +9,5 @@ interface HabitMasterApi {
     suspend fun signUp(request: SignUpData): HttpResponse
     suspend fun signIn(request: SignInData): HttpResponse
     suspend fun signIn(firebaseIdToken: FirebaseIdToken): HttpResponse
+    suspend fun getRandomJoke(): HttpResponse
 }

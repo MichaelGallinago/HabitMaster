@@ -20,5 +20,17 @@ sealed class DataState<out T> {
         } else this.exceptionOrNull()?.let {
             Failure(it.message ?: context.getString(R.string.unknown_error))
         } ?: Failure(context.getString(R.string.unknown_error))
+
+        fun <T, R> Result<T>.mapInDataState(
+            context: Context,
+            mapper: (T) -> R
+        ): DataState<R> = if (this.isSuccess) {
+            this.getOrNull()?.let { Success(mapper(it)) }
+                ?: Failure(context.getString(R.string.data_was_null))
+        } else {
+            this.exceptionOrNull()?.let {
+                Failure(it.message ?: context.getString(R.string.unknown_error))
+            } ?: Failure(context.getString(R.string.unknown_error))
+        }
     }
 }
